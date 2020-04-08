@@ -63,15 +63,32 @@ function getFriendsOfUser(user, cb) {
     }
     let friends = [];
     let count = 0;
+    let friends_to_remove = [];
     friends_ids.forEach(function(id) {
         getUserById(id, function(err, friend) {
-            friends.push(friend);
-            count++;
+            if(friend) {
+              friends.push(friend);
+            }
+            else {
+                friends_to_remove.push(id);
+            }
+            count++;  
+            
             if(count === friends_ids.length) {
+                friends_to_remove.forEach(function(id) {
+                    removeFriend(user.id, id, function(){});
+                });
                 cb(friends);
             }
         });
     });
+}
+
+function removeFriend(user_id, friend_id, cb) {
+    connect2db();
+    Person.findOneAndUpdate({_id: user_id}, {$pull: {friends: friend_id}}, function(err) {
+        cb(err);
+    })
 }
 
 function addFriend(userid, friendid, cb) {
@@ -83,11 +100,19 @@ function addFriend(userid, friendid, cb) {
     });
 }
 
+function deleteUser(id, cb) {
+    connect2db();
+    Person.deleteOne({_id: id}, function(err) {
+        cb(err);
+    });
+}
+
 module.exports = {
     save: save,
     getAllUsers: getAllUsers, 
     getUserByUsername: getUserByUsername,
     getUserById: getUserById,
     getFriendsOfUser: getFriendsOfUser,
-    addFriend: addFriend
+    addFriend: addFriend,
+    deleteUser: deleteUser
 }

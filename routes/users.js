@@ -31,6 +31,12 @@ router.get('/add_friend', function(req, res, next) {
   });
 });
 
+router.get('/delete', function(req, res, next) {
+  da_users.deleteUser(req.query.id, function(err) {
+    res.redirect('/users');
+  });
+});
+
 router.get('/add', function(req, res, next) {
   res.render('users/add', {title: 'Add user', userid: req.session['userid']});
 });
