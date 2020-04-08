@@ -23,13 +23,16 @@ router.get('/', function(req, res, next) {
         friends: []
       });
     }
-    
-
+  });
+});
+router.get('/add_friend', function(req, res, next) {
+  da_users.addFriend(req.session['userid'], req.query.id, function(err){
+    res.redirect('/users');
   });
 });
 
 router.get('/add', function(req, res, next) {
-  res.render('users/add', {title: 'Add user'});
+  res.render('users/add', {title: 'Add user', userid: req.session['userid']});
 });
 
 router.post('/add', function(req, res, next) {
@@ -44,7 +47,14 @@ router.post('/add', function(req, res, next) {
     avatar: req.body['avatar']
   }, function(err) {
     da_users.getAllUsers(function (err, users) {
-      res.render('users/users', {title: 'Users', user_list: users});
+      da_users.getUserById(req.session['userid'], function(err, user) {
+        res.render('users/users', {
+          title: 'Users', 
+          user_list: users,
+          userid: req.session['userid'],
+          friends: user.friends
+        });
+      });
     });
   })
 });

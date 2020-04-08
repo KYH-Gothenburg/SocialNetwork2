@@ -74,10 +74,20 @@ function getFriendsOfUser(user, cb) {
     });
 }
 
+function addFriend(userid, friendid, cb) {
+    connect2db();
+    Person.findOneAndUpdate({_id: userid}, {$push: {friends: friendid}}, upsert=false, function(err) {
+        Person.findOneAndUpdate({_id: friendid}, {$push: {friends: userid}}, upsert=false, function(err) {
+            cb(err);
+        });
+    });
+}
+
 module.exports = {
     save: save,
     getAllUsers: getAllUsers, 
     getUserByUsername: getUserByUsername,
     getUserById: getUserById,
-    getFriendsOfUser: getFriendsOfUser
+    getFriendsOfUser: getFriendsOfUser,
+    addFriend: addFriend
 }
