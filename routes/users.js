@@ -4,7 +4,27 @@ var da_users = require('../data_access/da_users');
 
 router.get('/', function(req, res, next) {
   da_users.getAllUsers(function (err, users) {
-    res.render('users/users', {title: 'Users', user_list: users});
+    let userid = req.session['userid'];
+    if(userid) {
+      da_users.getUserById(userid, function(err, user) {
+        res.render('users/users', {
+          title: 'Users', 
+          user_list: users, 
+          userid: userid,
+          friends: user.friends
+        });
+      });
+    }
+    else {
+      res.render('users/users', {
+        title: 'Users', 
+        user_list: users, 
+        userid: userid,
+        friends: []
+      });
+    }
+    
+
   });
 });
 

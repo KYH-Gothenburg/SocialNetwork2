@@ -11,6 +11,8 @@ block content
                 th Email
                 th Username
                 th Year of Birth
+                if userid
+                    th Add as Friend
 
             if user_list && user_list.length > 0
                 each user in user_list  
@@ -20,6 +22,21 @@ block content
                         td #{user.email}
                         td #{user.username}
                         td #{user.birthyear}
+                        if userid
+                            - var not_found = true
+                            td.center
+                                if userid === user.id
+                                    b You
+                                    - not_found = false
+                                else
+                                    each friend_id in friends
+                                        if friend_id === user.id
+                                            b Friend
+                                            - not_found = false
+                                    if not_found
+                                        a(href="/users/add_friend?=#{user.id}")
+                                            b Add
+
             else
                 tr
                     td(colspan=5) No Records
