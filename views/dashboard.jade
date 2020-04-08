@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    h1 Welcome #{user.first_name}
+    img(src='/images/avatars/#{user.avatar}')
+    p Info about you:
+        p First name: #{user.first_name}
+        p Last name: #{user.last_name}
+        p Email: #{user.email}
+        p Username: #{user.username}
+        p Year of birth: #{user.birthyear}
+
+    p Friends:
+    table.user_table
+        tr
+            th Image 
+            th Name
+        each friend in friends
+            tr
+                td 
+                    img.avatar-icon(src="/images/avatars/#{friend.avatar}")
+                td
+                    p #{friend.first_name} #{friend.last_name}

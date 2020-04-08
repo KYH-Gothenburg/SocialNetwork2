@@ -47,8 +47,37 @@ function getUserByUsername(username, cb) {
     });
 }
 
+function getUserById(id, cb) {
+    connect2db();
+    Person.findOne({_id: id}, function(err, user) {
+        cb(err, user);
+    });
+}
+
+
+function getFriendsOfUser(user, cb) {
+    connect2db();
+    let friends_ids = user.friends;
+    if(friends_ids.length === 0) {
+        cb([]);
+    }
+    let friends = [];
+    let count = 0;
+    friends_ids.forEach(function(id) {
+        getUserById(id, function(err, friend) {
+            friends.push(friend);
+            count++;
+            if(count === friends_ids.length) {
+                cb(friends);
+            }
+        });
+    });
+}
+
 module.exports = {
     save: save,
     getAllUsers: getAllUsers, 
-    getUserByUsername: getUserByUsername
+    getUserByUsername: getUserByUsername,
+    getUserById: getUserById,
+    getFriendsOfUser: getFriendsOfUser
 }
