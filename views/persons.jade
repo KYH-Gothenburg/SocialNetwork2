@@ -1,0 +1,35 @@
+extends layout
+
+block content
+ form.user_input(action='/person', method='post')
+    label(for='search')
+      span Search
+      input(type='text', name='search', id='search')
+    label.control-label(for='submit')
+      span
+      input(type='submit', id='submit', value='Search')
+      
+    h1= title
+    table.person_table
+        tr
+            th First Name
+            th Last Name
+            th Gender
+            th Street Address
+            th Zip Code
+            th City
+        if persons && persons.length > 0
+            each person in persons
+                tr
+                    td #{person.first_name}
+                    td #{person.last_name}
+                    td #{person.gender}
+                    td #{person.address.street_address}
+                    td #{person.address.zip}
+                    td #{person.address.city}
+        else
+            tr
+                td(colspan=6) No records
+
+
+    

@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    h1 Add user
+
+    form.person_input(action='/person/add', method='post')
+        input(type='text', name='first_name', id='first_name', required='true', placeholder='First name')
+        br
+        input(type='text', name='last_name', id='last_name', required='true', placeholder='Last name')
+        br
+        select(name='gender')
+            option(value="female") Female
+            option(value="male") Male
+        br
+        input(type='text', name='street_address', id='street_address', required='true', placeholder='Street address')
+        br
+        input(type='text', name='zip', id='zip', required='true', placeholder='Zip code')
+        br
+        input(type='text', name='city', id='city', required='true', placeholder='City')
+        br
+        input(type='submit', id='submit', value='Save')
+
+

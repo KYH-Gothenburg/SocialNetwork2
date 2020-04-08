@@ -1,0 +1,103 @@
+body {
+  
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+/* Header */
+
+.logo {
+  width: 128px;
+  height: 128px;
+}
+
+.layout-container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: 2px;
+}
+
+.title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 72px;
+  color: #394D61;
+  padding-top: 15px;
+}
+
+/* Page Content */
+.content-container {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+
+/* Menu */
+
+.menu {
+  background: #495C70;
+  color: #DAE5F4;
+  font-family: "Arial Black";
+  font-size: 24px;
+  border-radius: 10px;
+  padding-top: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  margin: 15px;
+  box-shadow: #394D61 4px 4px 10px;
+}
+
+.menu:hover {
+  color: #4E95F4;
+  text-decoration: none;
+}
+
+.menu-box {
+  margin-bottom: 50px;
+}
+
+/* Add user form */
+
+.avatar-icon {
+  width: 72px;
+  height: 72px;
+  padding: 5px;
+}
+
+.user_input input {
+  margin: 5px;
+  border-radius: 5px;
+}
+
+/* User Table */
+.user_table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user_table th {
+  padding: 7px;
+  border: #4e95f4 1px solid;
+  background-color: darkblue;
+  color: white;
+}
+
+.user_table td {
+  padding: 7px;
+  border: #4e95f4 1px solid;
+}
+
+.user_table tr:nth-child(odd) {
+  background-color: midnightblue;
+  color: white;
+}
+
+.user_table tr:nth-child(even) {
+  background-color: #4e95f4;
+  color: white;
+}

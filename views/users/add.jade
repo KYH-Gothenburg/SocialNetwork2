@@ -1,0 +1,50 @@
+extends ../layout
+
+block content
+    .content-container
+        h1 Add user
+
+        form.user_input(action='/users/add', method='post')
+            input(type='text', name='first_name', id='first_name', required='true', placeholder='First name')
+            br
+            input(type='text', name='last_name', id='last_name', required='true', placeholder='Last name')
+            br
+            input(type='text', name='email', id='email', required='true', placeholder='Email')
+            br
+            input(type='text', name='username', id='username', required='true', placeholder='Username')
+            br
+            input(type='password', name='password', id='password', required='true', placeholder='Password')
+            br
+            input(type='text', name='birthyear', id='birthyear', required='true', placeholder='Year of birth')
+            br
+            span(id='avatar') Avatar
+            br
+            input(type='radio', name="avatar", value='1.png')
+            img.avatar-icon(src='/images/avatars/1.png')
+            input(type='radio', name="avatar", value='2.png')
+            img.avatar-icon(src='/images/avatars/2.png')
+            input(type='radio', name="avatar", value='3.png')
+            img.avatar-icon(src='/images/avatars/3.png')
+            input(type='radio', name="avatar", value='4.png')
+            img.avatar-icon(src='/images/avatars/4.png')
+            br
+            input(type='radio', name="avatar", value='5.png')
+            img.avatar-icon(src='/images/avatars/5.png')
+            input(type='radio', name="avatar", value='6.png')
+            img.avatar-icon(src='/images/avatars/6.png')
+            input(type='radio', name="avatar", value='7.png')
+            img.avatar-icon(src='/images/avatars/7.png')
+            input(type='radio', name="avatar", value='8.png')
+            img.avatar-icon(src='/images/avatars/8.png')
+            br
+            input(type='radio', name="avatar", value='9.png')
+            img.avatar-icon(src='/images/avatars/9.png')
+            input(type='radio', name="avatar", value='10.png')
+            img.avatar-icon(src='/images/avatars/10.png')
+            input(type='radio', name="avatar", value='11.png')
+            img.avatar-icon(src='/images/avatars/11.png')
+            input(type='radio', name="avatar", value='12.png')
+            img.avatar-icon(src='/images/avatars/12.png')
+            br
+            input(type='submit', id='submit', value='Save')
+   

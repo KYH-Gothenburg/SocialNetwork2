@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  form.user_input(action='/person', method='post')
+    label(for='search')
+      span Search
+      input(type='text', name='search', id='search')
+    label.control-label(for='submit')
+      span
+      input(type='submit', id='submit', value='Search')

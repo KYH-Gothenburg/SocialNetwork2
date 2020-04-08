@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    .content-container
+        h1= title
+
+        form.user_login(action='/login', method='post')
+            input(type='text', id='username', name='username', placeholder='Username')
+            br
+            input(type='password', id='password', name='password', placeholder='Password')
+            br
+            input(type='submit', id='submit', value='Login')
