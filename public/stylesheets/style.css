@@ -101,3 +101,19 @@ a {
   background-color: #4e95f4;
   color: white;
 }
+
+/* Message */
+.message input[type=text] {
+  width: 400px;
+  margin-bottom: 20px;
+}
+
+.message select {
+  width: 400px;
+  margin-bottom: 20px;
+}
+
+.message textarea {
+  width: 400px;
+  margin-bottom: 20px;
+}
