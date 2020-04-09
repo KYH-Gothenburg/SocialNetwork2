@@ -59,6 +59,28 @@ a {
 
 .menu-box {
   margin-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.message-icon {
+  width: 64px;
+  height: 64px;
+  box-shadow: #394D61;
+  filter: drop-shadow(4px 4px 10px #394D61);
+}
+
+.message-count {
+  width: 18px;
+  height: 18px;
+  font-size: 11px;
+  text-align: center;
+  padding: 3px;
+  background-color: darkred;
+  color: azure;
+  margin: 2px;
+  border-radius: 50%;
+  box-shadow: #394D61 4px 4px 10px;
 }
 
 /* Add user form */

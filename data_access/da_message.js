@@ -23,6 +23,14 @@ function sendMessage(m, cb) {
     });
 }
 
+function getUnreadCount(id, cb) {
+    connect2db();
+    Message.find({to: id, read: false}, function(err, messages) {
+        cb(err, messages.length);
+    });
+}
+
 module.exports = {
-    sendMessage: sendMessage
+    sendMessage: sendMessage,
+    getUnreadCount: getUnreadCount
 }
