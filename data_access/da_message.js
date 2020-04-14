@@ -44,7 +44,6 @@ function getSenderForMessages(messages, cb) {
     messages.forEach(function(message) {
       Person.findOne({_id: message.from}, function(err, person){
         counter++;
-        console.log(person);
         message.from = person.first_name + " " + person.last_name;
         if(counter === messages.length) {
           cb(messages);
@@ -53,10 +52,34 @@ function getSenderForMessages(messages, cb) {
     });
 }
 
+function getSenderForMessage(message, cb) {
+  connect2db();
+  Person.findOne({_id: message.from}, function(err, person) {
+    message.from = person.first_name + " " + person.last_name;
+    cb(err, message);
+  });
+}
+
+function getMessageById(id, cb) {
+  connect2db();
+  Message.findOne({_id: id}, function(err, message) {
+    cb(err, message);
+  });
+}
+
+function markMessageAsRead(id, cb) {
+  connect2db();
+  Message.findOneAndUpdate({_id: id}, {read: true}, function(err){
+    cb(err);
+  });
+}
 
 module.exports = {
     sendMessage: sendMessage,
     getUnreadCount: getUnreadCount,
     getAllMessagesForId: getAllMessagesForId,
-    getSenderForMessages: getSenderForMessages
+    getSenderForMessages: getSenderForMessages,
+    getSenderForMessage: getSenderForMessage,
+    getMessageById: getMessageById,
+    markMessageAsRead: markMessageAsRead
 }

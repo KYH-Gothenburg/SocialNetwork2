@@ -32,4 +32,9 @@ html
                 div.message-count #{unreadCount}
             else
               a.menu(href='/login') Log In
-    block content
+    .page-content
+      .left-side
+        block content
+      .right-side 
+        h3 This is the side panel
+        p Put stuff here

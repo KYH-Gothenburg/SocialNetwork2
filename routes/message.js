@@ -42,18 +42,34 @@ router.post('/', rdl, function(req, res, next) {
 
 router.get('/inbox', rdl, function(req, res, next) {
     let userid = req.session.userid;
-    da_message.getAllMessagesForId(userid, function(err, messages) {
-        da_message.getSenderForMessages(messages, function(messages) {
-            for(let message of messages) {
-                let date = new Date(message.date);
-                let new_date = date.getDate() + " " + date.getMonth() + " " + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes(); 
-                message.date = new_date;
-            }
-            
-            res.render('inbox', {
-                title: 'Inbox',
-                userid: userid,
-                messages: messages
+    da_message.getUnreadCount(req.session.userid, function(err, unreadCount) {
+        da_message.getAllMessagesForId(userid, function(err, messages) {
+            da_message.getSenderForMessages(messages, function(messages) {
+                
+                res.render('inbox', {
+                    title: 'Inbox',
+                    userid: userid,
+                    messages: messages, 
+                    unreadCount: unreadCount
+                });
+                
+            });
+        });
+    });
+});
+
+router.get('/message', rdl, function(req, res, next) {
+    da_message.getMessageById(req.query.id, function(err, message) {
+        da_message.markMessageAsRead(req.query.id, function(err) {
+            da_message.getUnreadCount(req.session.userid, function(err, unreadCount) {
+                da_message.getSenderForMessage(message, function(err, message){
+                    res.render('read_message', {
+                        title: message.title,
+                        userid: req.session.userid,
+                        message: message,
+                        unreadCount: unreadCount
+                    });
+                });
             });
         });
     });

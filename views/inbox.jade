@@ -11,12 +11,15 @@ block content
             each message in messages
                 tr
                     if message.read
-                        td #{message.from}
-                        td #{message.date}
+                        td 
+                            a(href="/message/message?id=#{message.id}") #{message.from}
+                        td #{message.date.getFullYear()} #{message.date.getMonth()} #{message.date.getDay()} #{message.date.getHours()}:#{message.date.getMinutes()}
                         td #{message.title}
                     else
-                        td <b>#{message.from}</b>
-                        td <b>#{message.date}</b>
+                        td 
+                            a(href="/message/message?id=#{message.id}") 
+                                <b>#{message.from}</b>
+                        td <b>#{message.date.getFullYear()} #{message.date.getMonth()} #{message.date.getDay()} #{message.date.getHours()}:#{message.date.getMinutes()}</b>
                         td <b>#{message.title}</b>
 
             
