@@ -1,0 +1,22 @@
+extend layout
+
+block content
+    .content-container
+        h1 #{title}
+        table.inbox
+            tr
+                th From
+                th Date
+                th Title
+            each message in messages
+                tr
+                    if message.read
+                        td #{message.from}
+                        td #{message.date}
+                        td #{message.title}
+                    else
+                        td <b>#{message.from}</b>
+                        td <b>#{message.date}</b>
+                        td <b>#{message.title}</b>
+
+            

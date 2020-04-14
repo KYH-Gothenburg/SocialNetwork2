@@ -26,7 +26,8 @@ html
               a.menu(href='/message') Send Message
               a.menu(href='/dashboard') Dashboard
               a.menu(href='/logout') Log Out
-              img.message-icon(src='/images/message.png')
+              a(href='/message/inbox') 
+                img.message-icon(src='/images/message.png')
               if unreadCount > 0
                 div.message-count #{unreadCount}
             else

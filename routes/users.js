@@ -1,17 +1,22 @@
 var express = require('express');
 var router = express.Router();
 var da_users = require('../data_access/da_users');
+var da_message = require('../data_access/da_message');
 
 router.get('/', function(req, res, next) {
   da_users.getAllUsers(function (err, users) {
     let userid = req.session['userid'];
     if(userid) {
       da_users.getUserById(userid, function(err, user) {
-        res.render('users/users', {
-          title: 'Users', 
-          user_list: users, 
-          userid: userid,
-          friends: user.friends
+
+        da_message.getUnreadCount(userid, function(err, unreadCount) {
+          res.render('users/users', {
+            title: 'Users', 
+            user_list: users, 
+            userid: userid,
+            friends: user.friends,
+            unreadCount: unreadCount
+          });
         });
       });
     }
@@ -38,7 +43,9 @@ router.get('/delete', function(req, res, next) {
 });
 
 router.get('/add', function(req, res, next) {
-  res.render('users/add', {title: 'Add user', userid: req.session['userid']});
+  da_message.getUnreadCount(req.session.userid, function(err, unreadCount) {
+    res.render('users/add', {title: 'Add user', userid: req.session['userid'], unreadCount: unreadCount});
+  });
 });
 
 router.post('/add', function(req, res, next) {

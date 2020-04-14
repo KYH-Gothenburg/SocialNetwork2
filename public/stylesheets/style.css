@@ -124,6 +124,34 @@ a {
   color: white;
 }
 
+/* Dashboard */
+.dashboard {
+  display: flex;
+  flex-direction: row;
+}
+
+.dashboard .header-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  margin: 0 auto;
+  width: 40%;
+}
+
+.dashboard .header-block img{
+  height: 128px;
+  width: 128px;
+}
+
+.dashboard .info-block {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  width: 60%;
+}
+
+
 /* Message */
 .message input[type=text] {
   width: 400px;

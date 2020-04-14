@@ -1,4 +1,5 @@
 const Message = require("../models/message");
+const Person = require("../models/person");
 const mongoose = require("mongoose");
 
 function connect2db() {
@@ -30,7 +31,32 @@ function getUnreadCount(id, cb) {
     });
 }
 
+function getAllMessagesForId(id, cb) {
+    connect2db();
+    Message.find({to: id}, function(err, messages) {
+        cb(err, messages);
+    });
+}
+
+function getSenderForMessages(messages, cb) {
+    connect2db();
+    let counter = 0;
+    messages.forEach(function(message) {
+      Person.findOne({_id: message.from}, function(err, person){
+        counter++;
+        console.log(person);
+        message.from = person.first_name + " " + person.last_name;
+        if(counter === messages.length) {
+          cb(messages);
+        }
+      });
+    });
+}
+
+
 module.exports = {
     sendMessage: sendMessage,
-    getUnreadCount: getUnreadCount
+    getUnreadCount: getUnreadCount,
+    getAllMessagesForId: getAllMessagesForId,
+    getSenderForMessages: getSenderForMessages
 }
